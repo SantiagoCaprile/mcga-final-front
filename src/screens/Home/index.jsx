@@ -18,17 +18,16 @@ const Home = () => {
             <div className={styles.title}>
                 <h1>Final MCGA</h1>
                 <h2>Santiago Caprile</h2>
-                <h2>Aca va el log In</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <label>Username</label>
-                    <input {...register("username", { required: true })} />
-                    {errors.username && <span>This field is requiered</span>}
-                    <label>Password</label>
-                    <input type={"password"} {...register("password", { required: true })} />
-                    {errors.password && <span>This field is required</span>}
-                    <button type="submit">Log In</button>
-                </form>
             </div>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <label>Username</label>
+                <input className={styles.input} {...register("username", { required: true })} />
+                {errors.username && <span className={styles.error}>This field is requiered</span>}
+                <label>Password</label>
+                <input className={styles.input} type={"password"} {...register("password", { required: true })} />
+                {errors.password && <span className={styles.error}>This field is required</span>}
+                <button className={styles.button} type="submit">Log In</button>
+            </form>
         </div>
     )
 }

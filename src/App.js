@@ -2,14 +2,17 @@ import './App.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './screens/Home';
 import Matches from './screens/Matches';
+import Layout from './components/Layout';
 
 function App() {
   return (
-    <Routes>
+    <Layout>
+      <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/matches" element={<Matches />} />
         <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+        <Route path="/matches" element={<Matches />} />
+      </Routes>
+    </Layout>
   );
 }
 
