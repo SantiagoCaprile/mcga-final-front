@@ -1,12 +1,14 @@
 import React from 'react'
-
+import Match from '../../components/Match'
+import styles from './matches.module.css'
 
 const Matches = () => {
 
-
   return (
         <div>
-            Aca van los partidos
+            <h1 className={styles.title}>Matches</h1>
+            <Match />
+            <Match />
         </div>
   )
 }
