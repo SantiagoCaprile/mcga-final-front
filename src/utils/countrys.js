@@ -5,11 +5,11 @@ const COUNTRYS = [
   },
   {
     name: "Germany",
-    code: "GER",
+    code: "DEU",
   },
   {
     name: "Saudi Arabia",
-    code: "KSA",
+    code: "SAU",
   },
   {
     name: "Australia",
@@ -41,15 +41,15 @@ const COUNTRYS = [
   },
   {
     name: "Costa Rica",
-    code: "CRC",
+    code: "CRI",
   },
   {
     name: "Croatia",
-    code: "CRO",
+    code: "HRV",
   },
   {
     name: "Denmark",
-    code: "DEN",
+    code: "DNK",
   },
   {
     name: "Ecuador",
@@ -68,8 +68,8 @@ const COUNTRYS = [
     code: "FRA",
   },
   {
-    name: "Gales",
-    code: "WAL",
+    name: "Wales",
+    code: "GB-WLS",
   },
   {
     name: "Ghana",
@@ -77,7 +77,7 @@ const COUNTRYS = [
   },
   {
     name: "England",
-    code: "ENG",
+    code: "GB-ENG",
   },
   {
     name: "Iran",
@@ -97,7 +97,7 @@ const COUNTRYS = [
   },
   {
     name: "Netherlands",
-    code: "NED",
+    code: "NLD",
   },
   {
     name: "Poland",
@@ -105,7 +105,7 @@ const COUNTRYS = [
   },
   {
     name: "Portugal",
-    code: "POR",
+    code: "PRT",
   },
   {
     name: "Senegal",
@@ -117,11 +117,11 @@ const COUNTRYS = [
   },
   {
     name: "Switzerland",
-    code: "SUI",
+    code: "CHE",
   },
   {
     name: "Uruguay",
-    code: "URU",
+    code: "URY",
   },
   {
     name: "Tunisia",
