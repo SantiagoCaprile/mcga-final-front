@@ -6,7 +6,7 @@ const Matches = () => {
 
   return (
         <div>
-            <h1 className={styles.title}>Matches</h1>
+            <h1 className={styles.title}>Future Matches</h1>
             <Match />
             <Match />
             <Match />
