@@ -9,6 +9,10 @@ const Matches = () => {
             <h1 className={styles.title}>Matches</h1>
             <Match />
             <Match />
+            <Match />
+            <Match />
+            <Match />
+            <Match />
         </div>
   )
 }

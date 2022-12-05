@@ -9,10 +9,12 @@ const Layout = ({children}) => {
       </header>
       <main className={styles.main}>
         <div className={styles.content}>{children}</div>
-        <img className={styles.logo}
-          src="https://assets.stickpng.com/images/5842fe21a6515b1e0ad75b3e.png"
-          alt='logo'
-        />
+        <div className={styles.sidebar}>
+          <img className={styles.logo}
+            src="https://assets.stickpng.com/images/5842fe21a6515b1e0ad75b3e.png"
+            alt='logo'
+          />
+        </div>
       </main>
       <footer className={styles.footer}></footer>
     </div>
