@@ -26,8 +26,9 @@ const CreateMatch = () => {
             <h1 className={styles.title}>Create Match</h1>
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <div className={styles.row}>
-                    <label>Home Team</label>
+                    <div className={styles.col}>
                     <select className={styles.select} name= "homeTeam" {...register("homeTeam", { required: true })}>
+                        <option value="">-Home Team-</option>
                         {
                             COUNTRYS.map((country, index) => {
                                 return <option key={index} value={country.name}>{country.name}</option>
@@ -35,8 +36,10 @@ const CreateMatch = () => {
                         }
                     </select>
                     {errors.homeTeam && <span className={styles.error}>This field is requiered</span>}
-                    <label>Away Team</label>
-                    <select className={styles.select} name= "homeTeam" {...register("awayTeam", { required: true })}>
+                    </div>
+                    <div className={styles.col}>
+                    <select className={styles.select} name= "awayTeam" {...register("awayTeam", { required: true })}>
+                        <option value="">-Away Team-</option>
                         {
                             COUNTRYS.map((country, index) => {
                                 return <option key={index} value={country.name}>{country.name}</option>
@@ -44,14 +47,19 @@ const CreateMatch = () => {
                         }
                     </select>
                     {errors.awayTeam && <span className={styles.error}>This field is required</span>}
+                    </div>
                 </div>
                 <div className={styles.row}>
-                    <label>Match Date</label>
-                    <input className={styles.input} type={"date"} {...register("matchDate", { required: true }  )} />
-                    {errors.matchDate && <span className={styles.error}>Date is required</span>}
-                    <label>Match Time</label>
-                    <input className={styles.input} type={"time"} {...register("matchTime", { required: true })} />
-                    {errors.matchTime && <span className={styles.error}>Time is required</span>}
+                    <div className={styles.col}>
+                        <label>Match Date</label>
+                        <input className={styles.input} type={"date"} {...register("matchDate", { required: true }  )} />
+                        {errors.matchDate && <span className={styles.error}>Date is required</span>}
+                    </div>
+                    <div className={styles.col}>
+                        <label>Match Time</label>
+                        <input className={styles.input} type={"time"} {...register("matchTime", { required: true })} />
+                        {errors.matchTime && <span className={styles.error}>Time is required</span>}
+                    </div>
                 </div>
                 <button className={styles.button} type="submit">Preview</button>
             </form>
