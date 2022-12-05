@@ -2,12 +2,13 @@ import React from "react";
 import Flag from "react-world-flags";
 import styles from "./match.module.css";
 import { useState } from "react";
+import COUNTRYS from "../../utils/countrys";
 
-const Match = () => {
+const Match = (props) => {
     const [scoreHome, setScoreHome] = useState(0);
     const [scoreAway, setScoreAway] = useState(0);
     const [edit, setEdit] = useState(false);
-
+    console.log("props de match",props);
     const handleEdit = () => {
         setEdit(!edit);
     };
@@ -19,12 +20,15 @@ const Match = () => {
         return score;
     };
 
+    const homeCode = COUNTRYS.find((country) => country.name === props.homeTeam).code;
+    const awayCode = COUNTRYS.find((country) => country.name === props.awayTeam).code;
+
   return (
     <div className={styles.matchCard}>
       <div className={styles.matchScore}>
         <div className={styles.matchTeam}>
-          <Flag code="AR" height="50" />
-          <h3>Argentina</h3>
+          <Flag code={homeCode} height="50" />
+          <h3>{props.homeTeam}</h3>
         </div>
         <div className={styles.score}>
           {edit && (
@@ -66,12 +70,12 @@ const Match = () => {
           )}
         </div>
         <div className={styles.matchTeam}>
-          <Flag code="BR" height="50" />
-          <h3>Brazil</h3>
+          <Flag code={awayCode} height="50" />
+          <h3>{props.awayTeam}</h3>
         </div>
       </div>
       <div className={styles.matchInfo}>
-        <p> 12/12/2022 - 12:00 pm</p>
+        <p>{props.matchDate}</p>
         <button onClick={handleEdit} className={styles.editBtn}>
           {edit ? <span>Save Score</span> : <span>Edit Score</span>}
         </button>
