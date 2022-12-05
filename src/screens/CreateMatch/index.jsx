@@ -18,7 +18,11 @@ const CreateMatch = () => {
     const onSubmit = (data) => {
         console.log(data);
         data.matchDate = data.matchDate.split("-").reverse().join("/") + " - " + data.matchTime;
-        setPreview(data);
+        if(data.homeTeam === data.awayTeam){
+            setPreview({error: "The teams can't be the same"});
+        } else {
+            setPreview(data);
+        }
     };
 
     return (
@@ -35,7 +39,7 @@ const CreateMatch = () => {
                             })
                         }
                     </select>
-                    {errors.homeTeam && <span className={styles.error}>This field is requiered</span>}
+                    {errors.homeTeam && <span className={styles.error}>Please select a team</span>}
                     </div>
                     <div className={styles.col}>
                     <select className={styles.select} name= "awayTeam" {...register("awayTeam", { required: true })}>
@@ -46,7 +50,7 @@ const CreateMatch = () => {
                             })
                         }
                     </select>
-                    {errors.awayTeam && <span className={styles.error}>This field is required</span>}
+                    {errors.awayTeam && <span className={styles.error}>Please select a team</span>}
                     </div>
                 </div>
                 <div className={styles.row}>
@@ -61,9 +65,13 @@ const CreateMatch = () => {
                         {errors.matchTime && <span className={styles.error}>Time is required</span>}
                     </div>
                 </div>
+                {
+                    preview.error &&
+                    (<span className={styles.error}>Teams can't be the same</span>)
+                }
                 <button className={styles.button} type="submit">Preview</button>
             </form>
-            { preview.matchDate &&
+            { !preview.error &&
                     (<div className={styles.preview}>
                         <div className={styles.row}>
                             <h2 className={styles.title}>Preview</h2>
