@@ -7,7 +7,9 @@ import COUNTRYS from "../../utils/countrys";
 
 console.log(COUNTRYS);
 const CreateMatch = () => {
-    const [preview, setPreview] = useState({});
+    const [preview, setPreview] = useState(
+        {error: ""}
+    );
 
     const {
         register,
@@ -21,9 +23,12 @@ const CreateMatch = () => {
         if(data.homeTeam === data.awayTeam){
             setPreview({error: "The teams can't be the same"});
         } else {
+            data.error = "";
             setPreview(data);
         }
     };
+
+    console.log("preview", preview);
 
     return (
         <div className={styles.main}>
@@ -71,7 +76,7 @@ const CreateMatch = () => {
                 }
                 <button className={styles.button} type="submit">Preview</button>
             </form>
-            { !preview.error &&
+            { preview.matchDate && preview.homeTeam && preview.awayTeam && !preview.error &&
                     (<div className={styles.preview}>
                         <div className={styles.row}>
                             <h2 className={styles.title}>Preview</h2>
