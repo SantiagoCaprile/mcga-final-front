@@ -1,7 +1,7 @@
 .header, .footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 10vh;
     width: 100%;
     background: linear-gradient(90deg, rgba(92,13,38,1) 0%, rgba(142,22,58,1) 100%);
@@ -9,6 +9,9 @@
 
 .title {
     font-size: 2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    color: gold;
 }
 
 .main {
@@ -39,4 +42,31 @@
     justify-content: space-evenly;
     width: 10vh;
     background-color: #861537;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 30%;
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #861537;
+    background-color: gold;
+    border-radius: 5px;
+    padding: 10px;
+    text-decoration: none;
+    border: 2px solid #861537;
+    transition: all 0.3s ease;
+}
+
+.link:hover {
+    background-color: #861537;
+    color: gold;
+    border: 2px solid gold;
 }
