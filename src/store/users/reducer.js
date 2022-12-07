@@ -2,6 +2,7 @@ import {
   SAVE_USER_FULLFILLED,
   SAVE_USER_LOADING,
   SAVE_USER_REJECTED,
+  RESET_USER,
 } from "./types";
 
 const INITIAL_STATE = {
@@ -11,7 +12,6 @@ const INITIAL_STATE = {
 };
 
 const usersReducer = (state = INITIAL_STATE, action) => {
-    console.log("users action:", action)
   switch (action.type) {
     case SAVE_USER_FULLFILLED:
       return {
@@ -31,6 +31,14 @@ const usersReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isError: true,
         isLoading: false,
+      };
+
+    case RESET_USER:
+      return {
+        ...state,
+        data: [],
+        isLoading: false,
+        isError: false,
       };
 
     default:

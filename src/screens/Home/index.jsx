@@ -1,8 +1,23 @@
 import React from 'react'
 import styles from './home.module.css'
 import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { saveUsers } from '../../store/users/thunks'
+import { useNavigate } from 'react-router-dom'
+import { resetUser } from '../../store/users/actions'
 
 const Home = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const userSelector = useSelector(state => state.users)
+
+    useEffect(() => {
+        dispatch(resetUser())
+    }, [dispatch])
+
+    console.log("Selector users: ", userSelector)
+
     const {
         register,
         handleSubmit,
@@ -10,7 +25,19 @@ const Home = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data)
+        const user = {
+            name: data.username,
+            password: data.password
+        }
+        dispatch(saveUsers(user))
+    }
+
+    if (userSelector.error) {
+        console.log("Error: ", userSelector.error)
+    }
+
+    if (userSelector.data.message === "OK") {
+        navigate("/matches")
     }
 
     return (
@@ -26,8 +53,15 @@ const Home = () => {
                 <label>Password</label>
                 <input className={styles.input} type={"password"} {...register("password", { required: true })} />
                 {errors.password && <span className={styles.error}>This field is required</span>}
-                <button className={styles.button} type="submit">Log In</button>
+                {
+                    userSelector.isLoading? <div className={styles.loading}>Loading...</div>
+                    : <button className={styles.button} type="submit">Log In</button>
+                }
+
             </form>
+            {
+                userSelector.isError && <div className={styles.error}>Invalid Credentials</div>
+            }
         </div>
     )
 }

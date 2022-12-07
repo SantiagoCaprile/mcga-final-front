@@ -2,6 +2,7 @@ import {
     SAVE_USER_FULLFILLED,
     SAVE_USER_LOADING,
     SAVE_USER_REJECTED,
+    RESET_USER,
   } from "./types";
 
 export const saveUser = (data) => {
@@ -23,3 +24,9 @@ export const saveUserError = () => {
     type: SAVE_USER_REJECTED,
   };
 };
+
+export const resetUser = () => {
+  return {
+    type: RESET_USER,
+  };
+}
