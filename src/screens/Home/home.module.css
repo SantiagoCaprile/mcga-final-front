@@ -49,6 +49,11 @@ input:hover {
   font-size: 20px;
   font-style: italic;
   margin-bottom: 20px;
+  transition: all 1s ease;
+}
+
+.error::before {
+  content: "⚠ ";
 }
 
 .button {
