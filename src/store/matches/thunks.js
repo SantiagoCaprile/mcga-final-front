@@ -29,7 +29,7 @@ export const saveMatches = () => async (dispatch) => {
 export const addMatchThunk = (match) => async (dispatch) => {
     try {
         dispatch(addMatchLoading(true));
-        const response = await fetch('https://mcga-2022-backend-tm.vercel.app/api/products/add', {
+        const response = await fetch('https://mcga-final-back.vercel.app/matches/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

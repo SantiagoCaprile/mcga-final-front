@@ -2,14 +2,24 @@ import React from "react";
 import styles from "./createMatch.module.css";
 import Match from "../../components/Match";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import COUNTRYS from "../../utils/countrys";
+import { useDispatch, useSelector } from "react-redux";
+import { addMatchThunk, saveMatches } from "../../store/matches/thunks";
+import { useNavigate } from "react-router-dom";
 
-console.log(COUNTRYS);
 const CreateMatch = () => {
     const [preview, setPreview] = useState(
         {error: ""}
     );
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const matchesSelector = useSelector(state => state.matches);
+
+    useEffect(() => {
+        dispatch(saveMatches())
+    }, [dispatch])
 
     const {
         register,
@@ -18,17 +28,39 @@ const CreateMatch = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
         data.matchDate = data.matchDate.split("-").reverse().join("/") + " - " + data.matchTime;
         if(data.homeTeam === data.awayTeam){
             setPreview({error: "The teams can't be the same"});
         } else {
             data.error = "";
+            data.date = data.matchDate;
             setPreview(data);
         }
     };
 
-    console.log("preview", preview);
+    const handleConfirm = () => {
+        const formatDate = preview.date.split(" - ")[0].split("/").reverse().join("-") + "T" + preview.date.split(" - ")[1] + ":00.000Z";
+        const newMatch = {
+            homeTeam: preview.homeTeam,
+            awayTeam: preview.awayTeam,
+            date: formatDate
+        };
+        dispatch(addMatchThunk(newMatch))
+        .then(() => {
+            navigate("/matches");
+        })
+        .catch(() => {
+            console.log("Error");
+        })
+    };
+
+    if (matchesSelector.isLoading) {
+        return <h1>Loading...</h1>;
+    }
+
+    if (matchesSelector.isError) {
+        return <h1>Error...</h1>;
+    }
 
     return (
         <div className={styles.main}>
@@ -80,7 +112,7 @@ const CreateMatch = () => {
                     (<div className={styles.preview}>
                         <div className={styles.row}>
                             <h2 className={styles.title}>Preview</h2>
-                            <button className={styles.button}>Save</button>
+                            <button className={styles.button} onClick={handleConfirm} >Save</button>
                         </div>
                         <Match
                         homeTeam={preview.homeTeam}
