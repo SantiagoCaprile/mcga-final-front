@@ -4,6 +4,7 @@ import Home from './screens/Home';
 import Matches from './screens/Matches';
 import CreateMatch from './screens/CreateMatch';
 import Layout from './components/Layout';
+import PrivateRoute from './screens/PrivateRoute';
 
 function App() {
   return (
@@ -11,8 +12,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<Navigate to="/" />} />
-        <Route path="/matches" element={<Matches />} />
-        <Route path="/matches/create" element={<CreateMatch />} />
+        <Route
+          path="/matches"
+          element={
+            <PrivateRoute>
+              <Matches />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/matches/create"
+          element={
+            <PrivateRoute>
+              <CreateMatch />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Layout>
   );

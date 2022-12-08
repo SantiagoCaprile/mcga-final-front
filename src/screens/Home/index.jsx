@@ -1,22 +1,14 @@
 import React from 'react'
 import styles from './home.module.css'
 import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveUsers } from '../../store/users/thunks'
 import { useNavigate } from 'react-router-dom'
-import { resetUser } from '../../store/users/actions'
 
 const Home = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const userSelector = useSelector(state => state.users)
-
-    useEffect(() => {
-        dispatch(resetUser())
-    }, [dispatch])
-
-    console.log("Selector users: ", userSelector)
 
     const {
         register,
