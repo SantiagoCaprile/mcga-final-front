@@ -3,11 +3,28 @@ import styles from './layout.module.css'
 import { Link } from 'react-router-dom'
 import { resetUser } from '../../store/users/actions'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 const Layout = ({children}) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [showMenu, setShowMenu] = useState(false)
+  const userSelector = useSelector(state => state.users)
+
+  console.log("userSelector: ", userSelector)
+
+  //if userSelector is not empty, show menu else hide menu
+  //but when userSelector is not empty, it should show menu
+
+  useEffect(() => {
+    if (userSelector && userSelector.data.message === "OK") {
+      setShowMenu(true)
+    } else {
+      setShowMenu(false)
+    }
+  }, [userSelector])
 
   const handleLogout = () => {
     dispatch(resetUser())
@@ -19,9 +36,11 @@ const Layout = ({children}) => {
       <header className={styles.header}>
         <h1 className={styles.title}>MCGA 2022</h1>
         <div className={styles.links}>
-          <Link className={styles.link} to="/matches">Matches</Link>
-          <Link className={styles.link} to="/matches/create">Create</Link>
-          <button className={styles.link} to="/login" onClick={handleLogout}>Log Out</button>
+          { showMenu ? <>
+            <Link className={styles.link} to="/matches">Matches</Link>
+            <Link className={styles.link} to="/matches/create">Create</Link>
+            <button className={styles.link} to="/login" onClick={handleLogout}>Log Out</button>
+          </> : null }
         </div>
       </header>
       <main className={styles.main}>
