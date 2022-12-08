@@ -13,42 +13,50 @@ const Layout = ({children}) => {
   const [showMenu, setShowMenu] = useState(false)
   const userSelector = useSelector(state => state.users)
 
-  console.log("userSelector: ", userSelector)
-
-  //if userSelector is not empty, show menu else hide menu
-  //but when userSelector is not empty, it should show menu
-
   useEffect(() => {
     if (userSelector && userSelector.data.message === "OK") {
-      setShowMenu(true)
+      setShowMenu(true);
     } else {
-      setShowMenu(false)
+      setShowMenu(false);
     }
-  }, [userSelector])
+  }, [userSelector]);
 
   const handleLogout = () => {
-    dispatch(resetUser())
-    navigate("/")
-  }
+    dispatch(resetUser());
+    navigate("/");
+  };
 
   return (
     <div>
       <header className={styles.header}>
         <h1 className={styles.title}>MCGA 2022</h1>
         <div className={styles.links}>
-          { showMenu ? <>
-            <Link className={styles.link} to="/matches">Matches</Link>
-            <Link className={styles.link} to="/matches/create">Create</Link>
-            <button className={styles.link} to="/login" onClick={handleLogout}>Log Out</button>
-          </> : null }
+          {showMenu ? (
+            <>
+              <Link className={styles.link} to="/matches">
+                Matches
+              </Link>
+              <Link className={styles.link} to="/matches/create">
+                Create
+              </Link>
+              <button
+                className={styles.link}
+                to="/login"
+                onClick={handleLogout}
+              >
+                Log Out
+              </button>
+            </>
+          ) : null}
         </div>
       </header>
       <main className={styles.main}>
         <div className={styles.content}>{children}</div>
         <div className={styles.sidebar}>
-          <img className={styles.logo}
+          <img
+            className={styles.logo}
             src="https://assets.stickpng.com/images/5842fe21a6515b1e0ad75b3e.png"
-            alt='logo'
+            alt="logo"
           />
         </div>
       </main>
