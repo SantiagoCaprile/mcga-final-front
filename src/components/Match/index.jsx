@@ -4,7 +4,7 @@ import styles from "./match.module.css";
 import { useState } from "react";
 import COUNTRYS from "../../utils/countrys";
 import { useDispatch, useSelector } from "react-redux";
-import { editMatchThunk } from "../../store/matches/thunks";
+import { editMatchThunk, deleteMatchThunk } from "../../store/matches/thunks";
 
 const Match = (props) => {
     const dispatch = useDispatch();
@@ -17,6 +17,12 @@ const Match = (props) => {
     const handleEdit = () => {
         setEdit(!edit);
     };
+
+    const handleDelete = () => {
+        dispatch(deleteMatchThunk(props.id));
+        return null;
+    };
+
 
     const handleScoreSubstract = (score) => {
         if (score > 0) {
@@ -71,18 +77,18 @@ const Match = (props) => {
           {edit && (
             <button
               onClick={() => setScoreHome(scoreHome + 1)}
-              className={styles.button}
+              className={styles.button + " material-icons"}
             >
-              +
+              keyboard_arrow_up
             </button>
           )}
           <h3>{scoreHome}</h3>
           {edit && (
             <button
               onClick={() => setScoreHome(handleScoreSubstract(scoreHome))}
-              className={styles.button}
+              className={styles.button + " material-icons"}
             >
-              -
+              keyboard_arrow_down
             </button>
           )}
         </div>
@@ -91,18 +97,18 @@ const Match = (props) => {
           {edit && (
             <button
               onClick={() => setScoreAway(scoreAway + 1)}
-              className={styles.button}
+              className={styles.button + " material-icons"}
             >
-              +
+              keyboard_arrow_up
             </button>
           )}
           <h3>{scoreAway}</h3>
           {edit && (
             <button
               onClick={() => setScoreAway(handleScoreSubstract(scoreAway))}
-              className={styles.button}
+              className={styles.button + " material-icons"}
             >
-              -
+              keyboard_arrow_down
             </button>
           )}
         </div>
@@ -113,10 +119,20 @@ const Match = (props) => {
       </div>
       <div className={styles.matchInfo}>
         <p>{props.matchDate}</p>
-        { (props.noEditable) ? null :
-          edit ? <button onClick={editScore} className={styles.editBtn}>Save Score</button> :
-          <button onClick={handleEdit} className={styles.editBtn}>Edit Score</button>
-          }
+        {props.noEditable ? null : edit ? (
+          <>
+            <button onClick={editScore} className={styles.editBtn}>
+              Save Score
+            </button>
+            <button onClick={handleDelete} className={styles.editBtn + " material-icons"}>
+                    delete
+                </button>
+          </>
+        ) : (
+          <button onClick={handleEdit} className={styles.editBtn}>
+            Edit Score
+          </button>
+        )}
       </div>
     </div>
   );

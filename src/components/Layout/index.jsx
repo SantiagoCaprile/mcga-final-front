@@ -28,24 +28,31 @@ const Layout = ({children}) => {
 
   return (
     <div>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
       <header className={styles.header}>
         <h1 className={styles.title}>MCGA 2022</h1>
         <div className={styles.links}>
           {showMenu ? (
             <>
+            <div className={styles.tabs}>
               <Link className={styles.link} to="/matches">
                 Matches
+                <span className="material-icons"> sports_soccer </span>
               </Link>
               <Link className={styles.link} to="/matches/create">
                 Create
+                <span className="material-icons"> add_circle </span>
               </Link>
+            </div>
+            <div className={styles.userActions}>
               <button
                 className={styles.link}
-                to="/login"
                 onClick={handleLogout}
               >
                 Log Out
+                <span className="material-icons"> logout </span>
               </button>
+            </div>
             </>
           ) : null}
         </div>
