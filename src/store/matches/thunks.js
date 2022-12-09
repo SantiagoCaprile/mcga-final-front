@@ -71,7 +71,7 @@ export const editMatchThunk = (match) => async (dispatch) => {
 export const deleteMatchThunk = (id) => async (dispatch) => {
     try {
         dispatch(deleteMatchLoading(true));
-        const response = await fetch(`https://mcga-2022-backend-tm.vercel.app/api/products/${id}`, {
+        const response = await fetch(`http://localhost:3001/matches/${id}`, {
             method: 'DELETE',
         });
         if (response.status !== 200) throw new Error('Error');

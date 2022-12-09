@@ -7,7 +7,6 @@ import {
 export const saveUsers = (user) => async (dispatch) => {
     try {
         dispatch(saveUserLoading(true));
-        console.log(user);
         const response = await fetch("https://mcga-final-back.vercel.app/users", {
             method: "POST",
             headers: {
