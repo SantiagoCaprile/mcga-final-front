@@ -34,7 +34,8 @@
     opacity: 0.9;
     height: 530px;
     position: sticky;
-    top: 0;
+    top: 15vh;
+    bottom: 15vh;
 }
 
 .sidebar {
