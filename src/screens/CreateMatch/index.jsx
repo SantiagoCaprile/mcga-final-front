@@ -7,6 +7,7 @@ import COUNTRYS from "../../utils/countrys";
 import { useDispatch, useSelector } from "react-redux";
 import { addMatchThunk, saveMatches } from "../../store/matches/thunks";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/Spinner";
 
 const CreateMatch = () => {
     const [preview, setPreview] = useState(
@@ -55,7 +56,7 @@ const CreateMatch = () => {
     };
 
     if (matchesSelector.isLoading) {
-        return <h1>Loading...</h1>;
+        return <Spinner/>;
     }
 
     if (matchesSelector.isError) {

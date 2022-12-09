@@ -71,7 +71,7 @@ export const editMatchThunk = (match) => async (dispatch) => {
 export const deleteMatchThunk = (id) => async (dispatch) => {
     try {
         dispatch(deleteMatchLoading(true));
-        const response = await fetch(`http://localhost:3001/matches/${id}`, {
+        const response = await fetch(`https://mcga-final-back.vercel.app/matches/${id}`, {
             method: 'DELETE',
         });
         if (response.status !== 200) throw new Error('Error');

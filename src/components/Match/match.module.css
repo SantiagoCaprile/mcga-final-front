@@ -56,6 +56,9 @@
 
 .button {
     width: 50px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .editBtn {

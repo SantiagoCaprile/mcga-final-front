@@ -4,6 +4,7 @@ import styles from './matches.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { saveMatches } from '../../store/matches/thunks'
+import Spinner from '../../components/Spinner'
 
 const Matches = () => {
   const dispatch = useDispatch()
@@ -12,6 +13,10 @@ const Matches = () => {
   useEffect(() => {
     dispatch(saveMatches())
   }, [dispatch])
+
+  if (matchesSelector.isLoading) {
+    return <Spinner />
+  }
 
   if (matchesSelector.isError) {
     return <h1>Error...</h1>
