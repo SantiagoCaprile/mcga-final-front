@@ -118,6 +118,7 @@ const CreateMatch = () => {
                         homeTeam={preview.homeTeam}
                         awayTeam={preview.awayTeam}
                         matchDate={preview.matchDate}
+                        noEditable={true}
                         />
                     </div>
                     )
