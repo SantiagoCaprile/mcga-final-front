@@ -65,8 +65,13 @@ const matchesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         data: state.data.map((match) => {
-          if (match._id === action.payload._id) {
-            return action.payload;
+          if (match._id === action.payload.id) {
+            let newMatch = {
+              ...match,
+              homeScore: action.payload.homeScore,
+              awayScore: action.payload.awayScore,
+            }
+            return newMatch;
           }
           return match;
         }),

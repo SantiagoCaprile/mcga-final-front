@@ -13,25 +13,25 @@ const Matches = () => {
     dispatch(saveMatches())
   }, [dispatch])
 
-  if (matchesSelector.isLoading) {
-    return <h1>Loading...</h1>
-  }
-  console.log(matchesSelector)
   if (matchesSelector.isError) {
     return <h1>Error...</h1>
   }
 
   return (
         <div>
-            <h1 className={styles.title}>Future Matches</h1>
+            <h1 className={styles.title}>Matches</h1>
             {
               matchesSelector.data.map((match) => {
                 const date = match.date.split("T")[0].split("-").reverse().join("/")
                 const time = match.date.split("T")[1].split(":").slice(0, 2).join(":")
                 return (
                   <Match
+                    key={match._id}
+                    id={match._id}
                     homeTeam={match.homeTeam}
                     awayTeam={match.awayTeam}
+                    homeScore={match.homeScore}
+                    awayScore={match.awayScore}
                     matchDate={date + " - " + time}
                     />
                 )

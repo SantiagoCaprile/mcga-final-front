@@ -3,12 +3,17 @@ import Flag from "react-world-flags";
 import styles from "./match.module.css";
 import { useState } from "react";
 import COUNTRYS from "../../utils/countrys";
+import { useDispatch, useSelector } from "react-redux";
+import { editMatchThunk } from "../../store/matches/thunks";
 
 const Match = (props) => {
-    const [scoreHome, setScoreHome] = useState(0);
-    const [scoreAway, setScoreAway] = useState(0);
+    const dispatch = useDispatch();
+    const [scoreHome, setScoreHome] = useState(props.homeScore);
+    const [scoreAway, setScoreAway] = useState(props.awayScore);
+    const matchesSelector = useSelector((state) => state.matches);
     const [edit, setEdit] = useState(false);
-    console.log("props de match",props);
+    const [updated, setUpdated] = useState(false);
+
     const handleEdit = () => {
         setEdit(!edit);
     };
@@ -19,6 +24,38 @@ const Match = (props) => {
         }
         return score;
     };
+
+    const editScore = () => {
+      let match = {
+        id: props.id,
+        homeScore: scoreHome,
+        awayScore: scoreAway,
+      };
+      dispatch(editMatchThunk(match)).then(() => {
+        setUpdated(true);
+      });
+    };
+
+    if(updated && !matchesSelector.isLoading) {
+      setUpdated(false);
+      handleEdit();
+    }
+
+    if(updated && matchesSelector.isLoading) {
+      return (
+        <div className={styles.matchCard}>
+          <h1>Loading...</h1>
+        </div>
+      );
+    }
+
+    if (matchesSelector.isError) {
+      return (
+        <div className={styles.matchCard}>
+          <h1>Error...</h1>
+        </div>
+      );
+    }
 
     const homeCode = COUNTRYS.find((country) => country.name === props.homeTeam).code;
     const awayCode = COUNTRYS.find((country) => country.name === props.awayTeam).code;
@@ -76,9 +113,10 @@ const Match = (props) => {
       </div>
       <div className={styles.matchInfo}>
         <p>{props.matchDate}</p>
-        <button onClick={handleEdit} className={styles.editBtn}>
-          {edit ? <span>Save Score</span> : <span>Edit Score</span>}
-        </button>
+        { (props.noEditable) ? null :
+          edit ? <button onClick={editScore} className={styles.editBtn}>Save Score</button> :
+          <button onClick={handleEdit} className={styles.editBtn}>Edit Score</button>
+          }
       </div>
     </div>
   );

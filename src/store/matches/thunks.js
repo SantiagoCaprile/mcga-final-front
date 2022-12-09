@@ -48,17 +48,20 @@ export const addMatchThunk = (match) => async (dispatch) => {
 export const editMatchThunk = (match) => async (dispatch) => {
     try {
         dispatch(editMatchLoading(true));
-        const response = await fetch(`https://mcga-2022-backend-tm.vercel.app/api/products/`, {
+        const response = await fetch(`https://mcga-final-back.vercel.app/matches/${match.id}`, {
             method: 'PUT',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-            	'Access-Control-Allow-Origin': '*',
             },
-            body: JSON.stringify(match),
+            body: JSON.stringify({
+                "homeScore": match.homeScore,
+                "awayScore": match.awayScore,
+            }),
         });
-        const matchResponse = await response.json();
+        await response.json();
         if (response.status !== 200) throw new Error('Error');
-        dispatch(editMatch(matchResponse));
+        dispatch(editMatch(match));
         dispatch(editMatchLoading(false));
     } catch (error) {
         dispatch(editMatchError());
