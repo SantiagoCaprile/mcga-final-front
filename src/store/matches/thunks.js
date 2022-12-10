@@ -16,7 +16,13 @@ import {
 export const saveMatches = () => async (dispatch) => {
     try {
         dispatch(saveMatchLoading(true));
-        const response = await fetch('https://mcga-final-back.vercel.app/matches');
+        const response = await fetch('https://mcga-final-back.vercel.app/matches', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token'),
+            },
+        });
         const matchResponse = await response.json();
         if (response.status !== 200) throw new Error('Error');
         dispatch(saveMatch(matchResponse));
@@ -32,6 +38,7 @@ export const addMatchThunk = (match) => async (dispatch) => {
         const response = await fetch('https://mcga-final-back.vercel.app/matches/create', {
             method: 'POST',
             headers: {
+                'Authorization': localStorage.getItem('token'),
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(match),
@@ -52,6 +59,7 @@ export const editMatchThunk = (match) => async (dispatch) => {
             method: 'PUT',
             mode: 'cors',
             headers: {
+                'Authorization': localStorage.getItem('token'),
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -73,6 +81,9 @@ export const deleteMatchThunk = (id) => async (dispatch) => {
         dispatch(deleteMatchLoading(true));
         const response = await fetch(`https://mcga-final-back.vercel.app/matches/${id}`, {
             method: 'DELETE',
+            headers: {
+                'Authorization': localStorage.getItem('token'),
+            },
         });
         if (response.status !== 200) throw new Error('Error');
         dispatch(deleteMatch(id));

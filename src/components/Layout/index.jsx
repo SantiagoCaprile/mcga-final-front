@@ -23,6 +23,7 @@ const Layout = ({children}) => {
 
   const handleLogout = () => {
     dispatch(resetUser());
+    localStorage.removeItem("token");
     navigate("/");
   };
 
