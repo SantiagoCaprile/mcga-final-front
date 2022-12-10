@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./createMatch.module.css";
 import Match from "../../components/Match";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import COUNTRYS from "../../utils/countrys";
 import { useDispatch, useSelector } from "react-redux";
-import { addMatchThunk, saveMatches } from "../../store/matches/thunks";
+import { addMatchThunk } from "../../store/matches/thunks";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 
@@ -17,10 +17,6 @@ const CreateMatch = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const matchesSelector = useSelector(state => state.matches);
-
-    useEffect(() => {
-        dispatch(saveMatches())
-    }, [dispatch])
 
     const {
         register,
