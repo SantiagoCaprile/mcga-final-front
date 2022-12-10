@@ -2,23 +2,16 @@ import React from 'react'
 import Match from '../../components/Match'
 import styles from './matches.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { saveMatches } from '../../store/matches/thunks'
-import Spinner from '../../components/Spinner'
 
 const Matches = () => {
   const dispatch = useDispatch()
   const matchesSelector = useSelector(state => state.matches)
-  const [firstRender, setFirstRender] = useState(true)
 
   useEffect(() => {
     dispatch(saveMatches())
   }, [dispatch])
-
-  if (firstRender && matchesSelector.isLoading) {
-    setFirstRender(false)
-    return <Spinner />
-  }
 
   if (matchesSelector.isError) {
     return <h1>Error...</h1>

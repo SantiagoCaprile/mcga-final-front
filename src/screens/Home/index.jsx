@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveUsers } from '../../store/users/thunks'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../../components/Spinner'
 
 const Home = () => {
     const navigate = useNavigate()
@@ -22,6 +23,10 @@ const Home = () => {
             password: data.password
         }
         dispatch(saveUsers(user))
+    }
+
+    if (userSelector.isLoading) {
+        return <Spinner />
     }
 
     if (userSelector.error) {
