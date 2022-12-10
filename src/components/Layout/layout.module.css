@@ -1,7 +1,7 @@
 .header, .footer {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     height: 10vh;
     width: 100%;
     background: linear-gradient(90deg, rgba(92,13,38,1) 0%, rgba(142,22,58,1) 100%);
@@ -67,7 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 75%;
+    width: 90%;
 }
 
 .link {
@@ -84,6 +84,7 @@
     border: 2px solid #861537;
     transition: all 0.3s ease;
     cursor: pointer;
+    margin: 0px 10px;
 }
 
 .link:hover {

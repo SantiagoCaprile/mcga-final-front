@@ -68,7 +68,9 @@ const Layout = ({children}) => {
           />
         </div>
       </main>
-      <footer className={styles.footer}></footer>
+      <footer className={styles.footer}>
+        <p>Copa Mundial de la FIFA - Qatar 2022 </p>
+      </footer>
     </div>
   );
 }
