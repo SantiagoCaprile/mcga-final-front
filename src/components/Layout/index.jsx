@@ -63,7 +63,7 @@ const Layout = ({children}) => {
         <div className={styles.sidebar}>
           <img
             className={styles.logo}
-            src="https://assets.stickpng.com/images/5842fe21a6515b1e0ad75b3e.png"
+            src="https://firebasestorage.googleapis.com/v0/b/reactpruebas-70ed2.appspot.com/o/5842fe21a6515b1e0ad75b3e.png?alt=media&token=0f5d9a78-5ae6-407d-8b8a-2e7cb1abc71a"
             alt="logo"
           />
         </div>
