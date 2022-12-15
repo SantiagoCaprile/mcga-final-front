@@ -61,14 +61,40 @@
     text-align: center;
 }
 
-.editBtn {
+.editBtn, .deleteBtn, .undoBtn, .saveBtn {
     background-color: #8d1c3d;
     color: #fff;
-    border: none;
+    border: 1px solid #fff;
     height: 30px;
     font-size: 15px;
     border-radius: 5px;
     padding: 5px;
     transition: all 0.3s ease;
     cursor: pointer;
+    text-align: center;
+}
+
+.editBtn:hover {
+    background-color: gold;
+    color: #8d1c3d;
+}
+
+.deleteBtn {
+    background-color: red;
+}
+
+.deleteBtn:hover {
+    background-color: black;
+    color: red;
+}
+
+.undoBtn, .saveBtn {
+    background-color: green;
+    border: 1px solid #000;
+    color: #fff;
+}
+
+.undoBtn:hover, .saveBtn:hover {
+    background-color: black;
+    color: greenyellow;
 }

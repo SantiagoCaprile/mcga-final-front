@@ -13,9 +13,14 @@ const Match = (props) => {
     const matchesSelector = useSelector((state) => state.matches);
     const [edit, setEdit] = useState(false);
     const [updated, setUpdated] = useState(false);
+    const [remove, setRemove] = useState(false);
 
     const handleEdit = () => {
         setEdit(!edit);
+    };
+
+    const handleSetRemove = () => {
+        setRemove(!remove);
     };
 
     const handleDelete = () => {
@@ -39,6 +44,7 @@ const Match = (props) => {
       };
       dispatch(editMatchThunk(match)).then(() => {
         setUpdated(true);
+        setRemove(false);
       });
     };
 
@@ -121,16 +127,37 @@ const Match = (props) => {
         <p>{props.matchDate}</p>
         {props.noEditable ? null : edit ? (
           <>
-            <button onClick={editScore} className={styles.editBtn}>
+            <button onClick={editScore} className={styles.saveBtn}>
               Save Score
             </button>
-            <button onClick={handleDelete} className={styles.editBtn + " material-icons"}>
-                    delete
+            {!remove && (
+              <button
+                onClick={handleSetRemove}
+                className={styles.editBtn + " material-icons"}
+              >
+                delete
+              </button>
+            )}
+            {remove && (
+              <>
+                <button
+                  onClick={handleDelete}
+                  className={styles.deleteBtn + " material-icons"}
+                >
+                  delete_forever
                 </button>
+                <button
+                  onClick={handleSetRemove}
+                  className={styles.undoBtn + " material-icons"}
+                >
+                  history
+                </button>
+              </>
+            )}
           </>
         ) : (
           <button onClick={handleEdit} className={styles.editBtn}>
-            Edit Score
+            Edit Match
           </button>
         )}
       </div>
